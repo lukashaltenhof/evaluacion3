@@ -1,4 +1,4 @@
-# gestionviajes/urls.py
+
 
 from django.urls import path
 from . import views
@@ -11,6 +11,7 @@ urlpatterns = [
     path('pago/', views.pago, name='pago'),
     path('contacto/', views.contacto, name='contacto'),
     path('login/', views.login, name='login'),
-    path('index/', views.index, name='index')
-    # Otras rutas según sea necesario para tu aplicación
+    path('index/', views.index, name='index'),
+    path('logout/', views.logout, name='logout'),
+    path('nuestros_servicios/', views.nuestros_servicios, name='nuestros_servicios'),
 ]

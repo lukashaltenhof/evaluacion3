@@ -9,6 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .forms import RegistroUsuarioForm, RegistroClienteForm, PaqueteForm, ContactoForm
 from .models import Carrito, PaqueteTuristico, FormularioContacto, Boleta
+from django.contrib.auth import logout as auth_logout
 
 def registro_cliente(request):
     if request.method == 'POST':
@@ -65,9 +66,14 @@ def contacto(request):
 
 @login_required
 def ver_carrito(request):
-    cliente = request.user.cliente
-    carrito, created = Carrito.objects.get_or_create(cliente=cliente)
+    try:
+        cliente = request.user.cliente
+        carrito, created = Carrito.objects.get_or_create(cliente=cliente)
+    except Carrito.DoesNotExist:
+        return redirect('index')  # Redirige al index si no existe carrito para este usuario
+
     return render(request, 'carrito.html', {'carrito': carrito})
+
 
 
 @csrf_protect
@@ -82,5 +88,12 @@ def login(request):
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
+def logout(request):
+    auth_logout(request)
+    return redirect('index')
+
 def index(request):
     return render(request, 'index.html')
+
+def nuestros_servicios(request):
+    return render(request, 'nuestros_servicios.html')
