@@ -1,0 +1,9 @@
+<!-- gestionviajes/templates/boleta.html -->
+<h2>Boleta</h2>
+<p>Fecha de Emisión: {{ boleta.fecha_emision }}</p>
+<ul>
+    {% for paquete in boleta.carrito.paquetes.all %}
+    <li>{{ paquete.nombre_destino }} - {{ paquete.fecha_viaje }} - ${{ paquete.valor }}</li>
+    {% endfor %}
+</ul>
+<p>Total: ${{ boleta.carrito.total }}</p>

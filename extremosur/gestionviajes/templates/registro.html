@@ -1,0 +1,7 @@
+<!-- gestionviajes/templates/registro.html -->
+<form method="post">
+    {% csrf_token %}
+    {{ usuario_form.as_p }}
+    {{ cliente_form.as_p }}
+    <button type="submit">Registrarse</button>
+</form>

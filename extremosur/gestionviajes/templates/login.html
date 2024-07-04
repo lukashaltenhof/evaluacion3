@@ -1,0 +1,36 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar sesión</title>
+</head>
+<body>
+    <h2>Iniciar sesión</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% if form.errors %}
+            <p style="color: red;">Por favor corrige los siguientes errores:</p>
+            <ul>
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ field.label }}: {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <p>
+            <label for="id_username">Usuario:</label>
+            {{ form.username }}
+        </p>
+        <p>
+            <label for="id_password">Contraseña:</label>
+            {{ form.password }}
+        </p>
+        <input type="submit" value="Iniciar sesión">
+    </form>
+</body>
+</html>

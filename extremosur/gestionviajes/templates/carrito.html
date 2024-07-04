@@ -1,0 +1,9 @@
+<!-- gestionviajes/templates/carrito.html -->
+<h2>Carrito de Compras</h2>
+<ul>
+    {% for paquete in carrito.paquetes.all %}
+    <li>{{ paquete.nombre_destino }} - {{ paquete.fecha_viaje }} - ${{ paquete.valor }}</li>
+    {% endfor %}
+</ul>
+<p>Total: ${{ carrito.total }}</p>
+<a href="{% url 'pago' %}">Pagar</a>
