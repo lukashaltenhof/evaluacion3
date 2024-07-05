@@ -1,9 +1,50 @@
-<!-- gestionviajes/templates/carrito.html -->
-<h2>Carrito de Compras</h2>
-<ul>
-    {% for paquete in carrito.paquetes.all %}
-    <li>{{ paquete.nombre_destino }} - {{ paquete.fecha_viaje }} - ${{ paquete.valor }}</li>
-    {% endfor %}
-</ul>
-<p>Total: ${{ carrito.total }}</p>
-<a href="{% url 'pago' %}">Pagar</a>
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h2>Carrito de Compras</h2>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Paquete de Viaje A</h5>
+                <p class="card-text">Descripción del paquete A.</p>
+                <p class="card-text">Precio: $1000</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <label for="fecha_salida_a">Fecha de Salida:</label>
+                    <input type="date" id="fecha_salida_a" name="fecha_salida_a" required>
+                    <button type="submit" class="btn btn-primary mt-2">Agregar al Carrito</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Paquete de Viaje B</h5>
+                <p class="card-text">Descripción del paquete B.</p>
+                <p class="card-text">Precio: $1500</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <label for="fecha_salida_b">Fecha de Salida:</label>
+                    <input type="date" id="fecha_salida_b" name="fecha_salida_b" required>
+                    <button type="submit" class="btn btn-primary mt-2">Agregar al Carrito</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Paquete de Viaje C</h5>
+                <p class="card-text">Descripción del paquete C.</p>
+                <p class="card-text">Precio: $1200</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <label for="fecha_salida_c">Fecha de Salida:</label>
+                    <input type="date" id="fecha_salida_c" name="fecha_salida_c" required>
+                    <button type="submit" class="btn btn-primary mt-2">Agregar al Carrito</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

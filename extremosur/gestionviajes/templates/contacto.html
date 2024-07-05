@@ -1,12 +1,14 @@
+<!-- contacto.html -->
 {% extends "base.html" %}
 {% load static %}
 
 {% block content %}
-
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Enviar</button>
-</form>
-
+    <div class="container">
+        <h1>Contáctanos</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
 {% endblock %}

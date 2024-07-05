@@ -1,9 +1,11 @@
+/* styles.css */
+/* Estilos generales */
 body {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color: #ccc;
+    color: #000; /* Color de texto negro */
     margin: 0;
     padding: 0;
-    background-image: url('/static/css/img/fondo.png'); /* Correct path to the background image */
+    background-image: url('/static/css/img/fondo.png'); /* Ruta correcta a la imagen de fondo */
     background-repeat: repeat-y;
     background-attachment: fixed;
     background-size: cover;
@@ -25,11 +27,11 @@ body {
 
 .navbar ul li {
     display: inline-block;
-    margin-right: 20px; /* Adjust as needed */
+    margin-right: 20px; /* Ajustar según sea necesario */
 }
 
 .navbar ul li:last-child {
-    margin-right: 0; /* Remove margin from last item */
+    margin-right: 0; /* Eliminar margen del último elemento */
 }
 
 .navbar ul li a {
