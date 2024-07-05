@@ -19,5 +19,10 @@ urlpatterns = [
     path('paquetes/create/', views.paquete_create, name='paquete_create'),
     path('paquetes/update/<int:id>/', views.paquete_update, name='paquete_update'),
     path('paquetes/delete/<int:id>/', views.paquete_delete, name='paquete_delete'),
+    path('contactos/', views.contacto_list, name='contacto_list'),
+    path('contactos/<int:id>/', views.contacto_detail, name='contacto_detail'),
+    path('contactos/create/', views.contacto_create, name='contacto_create'),
+    path('contactos/update/<int:id>/', views.contacto_update, name='contacto_update'),
+    path('contactos/delete/<int:id>/', views.contacto_delete, name='contacto_delete'),
    
 ]

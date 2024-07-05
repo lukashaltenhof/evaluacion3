@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Contactos</title>
+</head>
+<body>
+    <h1>Lista de Contactos</h1>
+    <a href="{% url 'contacto_create' %}">Crear Nuevo Contacto</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>RUT</th>
+                <th>Ciudad</th>
+                <th>Correo Electrónico</th>
+                <th>Consulta</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contacto in contactos %}
+            <tr>
+                <td>{{ contacto.id }}</td>
+                <td>{{ contacto.nombre }}</td>
+                <td>{{ contacto.rut }}</td>
+                <td>{{ contacto.ciudad }}</td>
+                <td>{{ contacto.correo_electronico }}</td>
+                <td>{{ contacto.consulta }}</td>
+                <td>
+                    <a href="{% url 'contacto_detail' contacto.id %}">Ver</a>
+                    <a href="{% url 'contacto_update' contacto.id %}">Editar</a>
+                    <a href="{% url 'contacto_delete' contacto.id %}">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
+{% endblock %}

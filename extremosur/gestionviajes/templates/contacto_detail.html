@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalle del Contacto</title>
+</head>
+<body>
+    <h1>Detalle del Contacto</h1>
+    <p>Nombre: {{ contacto.nombre }}</p>
+    <p>RUT: {{ contacto.rut }}</p>
+    <p>Ciudad: {{ contacto.ciudad }}</p>
+    <p>Correo Electrónico: {{ contacto.correo_electronico }}</p>
+    <p>Consulta: {{ contacto.consulta }}</p>
+    <a href="{% url 'contacto_update' contacto.id %}">Editar</a>
+    <a href="{% url 'contacto_delete' contacto.id %}">Eliminar</a>
+    <a href="{% url 'contacto_list' %}">Volver a la lista</a>
+</body>
+</html>
+
+{% endblock %}

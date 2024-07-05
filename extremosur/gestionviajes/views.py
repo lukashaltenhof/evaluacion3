@@ -145,3 +145,50 @@ def paquete_delete(request, id):
         paquete.delete()
         return redirect('paquete_list')
     return render(request, 'paquete_confirm_delete.html', {'paquete': paquete})
+
+# Listar contactos
+@staff_member_required
+def contacto_list(request):
+    contactos = FormularioContacto.objects.all()
+    return render(request, 'contacto_list.html', {'contactos': contactos})
+
+# Detalle de contacto
+@staff_member_required
+def contacto_detail(request, id):
+    contacto = get_object_or_404(FormularioContacto, id=id)
+    return render(request, 'contacto_detail.html', {'contacto': contacto})
+
+# Crear contacto
+@staff_member_required
+def contacto_create(request):
+    if request.method == 'POST':
+        form = ContactoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('contacto_list')
+    else:
+        form = ContactoForm()
+    return render(request, 'contacto_form.html', {'form': form})
+
+# Actualizar contacto
+@staff_member_required
+def contacto_update(request, id):
+    contacto = get_object_or_404(FormularioContacto, id=id)
+    if request.method == 'POST':
+        form = ContactoForm(request.POST, instance=contacto)
+        if form.is_valid():
+            form.save()
+            return redirect('contacto_list')
+    else:
+        form = ContactoForm(instance=contacto)
+    return render(request, 'contacto_form.html', {'form': form})
+
+# Eliminar contacto
+@staff_member_required
+def contacto_delete(request, id):
+    contacto = get_object_or_404(FormularioContacto, id=id)
+    if request.method == 'POST':
+        contacto.delete()
+        return redirect('contacto_list')
+    return render(request, 'contacto_confirm_delete.html', {'contacto': contacto})
+
