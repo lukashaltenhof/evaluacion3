@@ -23,3 +23,4 @@ class ContactoForm(forms.ModelForm):
     class Meta:
         model = FormularioContacto
         fields = ['nombre', 'rut', 'ciudad', 'correo_electronico', 'consulta']
+

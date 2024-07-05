@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalle del Paquete Turístico</title>
+</head>
+<body>
+    <h1>Detalle del Paquete Turístico</h1>
+    <p>Nombre Destino: {{ paquete.nombre_destino }}</p>
+    <p>Fecha de Viaje: {{ paquete.fecha_viaje }}</p>
+    <p>Valor: {{ paquete.valor }}</p>
+    <a href="{% url 'paquete_update' paquete.id %}">Editar</a>
+    <a href="{% url 'paquete_delete' paquete.id %}">Eliminar</a>
+    <a href="{% url 'paquete_list' %}">Volver a la lista</a>
+</body>
+</html>
