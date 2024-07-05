@@ -5,7 +5,7 @@ body {
     color: #000; /* Color de texto negro */
     margin: 0;
     padding: 0;
-    background-image: url('/static/css/img/fondo.png'); /* Ruta correcta a la imagen de fondo */
+    background-image: url('/static/img/fondo.png'); /* Ruta correcta a la imagen de fondo */
     background-repeat: repeat-y;
     background-attachment: fixed;
     background-size: cover;
