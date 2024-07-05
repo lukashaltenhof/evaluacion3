@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
     Nuestros Servicios - Turismo ExtremoSur
 {% endblock %}
 
 {% block extra_css %}
     <!-- Mi hoja de estilos CSS -->
-    <link rel="stylesheet" href="{'css/styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 {% endblock %}
 
 {% block content %}
-    {% load static %}
-
     <section id="nuestros-servicios">
         <div class="container-fluid">
             <div class="row">
@@ -21,54 +21,30 @@
                     <br>
                     <div class="card-deck">
                         <div class="card">
-                            <!-- Content initially hidden -->
-                            <div class="card-body d-none" id="content1">
+                            <img src="{% static 'img/monte_tarn.png' %}" class="card-img-top" id="img1" alt="Monte Tarn" data-toggle="modal" data-target="#monteTarnModal">
+                            <div class="card-body" id="content1">
                                 <h3 class="card-title">Caminata al Monte Tarn</h3>
                                 <p class="card-text"><strong>Precio por persona:</strong> $50.000</p>
                                 <p class="card-text">Disfruta de una caminata emocionante hasta la cima del Monte Tarn, donde serás recompensado con vistas espectaculares de la región. Esta excursión incluye guías expertos y transporte de ida y vuelta desde tu alojamiento.</p>
                             </div>
-                            <!-- Initial spinner -->
-                            <div class="d-flex justify-content-center align-items-center spinner-container" id="spinner1">
-                                <div class="spinner-border" role="status">
-                                    <span class="sr-only">Loading...</span>
-                                </div>
-                            </div>
-                            <!-- Initially hidden image -->
-                            <img src="{% static 'img/monte_tarn.png' %}" class="card-img-top d-none" id="img1" alt="Monte Tarn" data-toggle="modal" data-target="#monteTarnModal">
                         </div>
 
                         <div class="card">
-                            <!-- Content initially hidden -->
-                            <div class="card-body d-none" id="content2">
+                            <img src="{% static 'img/parrillar.png' %}" class="card-img-top" id="img2" alt="Parrillar" data-toggle="modal" data-target="#parrillarModal">
+                            <div class="card-body" id="content2">
                                 <h3 class="card-title">Caminata a Parrillar</h3>
                                 <p class="card-text"><strong>Precio por persona:</strong> $60.000</p>
                                 <p class="card-text">Embárcate en una aventura inolvidable a través de los senderos del Parrillar, rodeado de una exuberante vegetación y paisajes impresionantes. Esta caminata te lleva a lugares fuera de lo común y te permite conectarte plenamente con la naturaleza.</p>
                             </div>
-                            <!-- Initial spinner -->
-                            <div class="d-flex justify-content-center align-items-center spinner-container" id="spinner2">
-                                <div class="spinner-border" role="status">
-                                    <span class="sr-only">Loading...</span>
-                                </div>
-                            </div>
-                            <!-- Initially hidden image -->
-                            <img src="{% static 'img/parrillar.png' %}" class="card-img-top d-none" id="img2" alt="Parrillar" data-toggle="modal" data-target="#parrillarModal">
                         </div>
 
                         <div class="card">
-                            <!-- Content initially hidden -->
-                            <div class="card-body d-none" id="content3">
+                            <img src="{% static 'img/mirador_zapador_austral.png' %}" class="card-img-top" id="img3" alt="Mirador Zapador Austral" data-toggle="modal" data-target="#miradorZapadorModal">
+                            <div class="card-body" id="content3">
                                 <h3 class="card-title">Caminata a Mirador Zapador Austral</h3>
                                 <p class="card-text"><strong>Precio por persona:</strong> $70.000</p>
                                 <p class="card-text">Descubre el encanto del Mirador Zapador Austral mientras exploras sus senderos panorámicos y observas la majestuosidad de la naturaleza circundante. Esta caminata te ofrece una experiencia única llena de belleza y aventura.</p>
                             </div>
-                            <!-- Initial spinner -->
-                            <div class="d-flex justify-content-center align-items-center spinner-container" id="spinner3">
-                                <div class="spinner-border" role="status">
-                                    <span class="sr-only">Loading...</span>
-                                </div>
-                            </div>
-                            <!-- Initially hidden image -->
-                            <img src="{% static 'img/mirador_zapador_austral.png' %}" class="card-img-top d-none" id="img3" alt="Mirador Zapador Austral" data-toggle="modal" data-target="#miradorZapadorModal">
                         </div>
                     </div>
                 </div>
@@ -77,8 +53,7 @@
     </section>
 
     <!-- Modals for larger images -->
-    <div class="modal fade" id="monteTarnModal" tabindex="-1" role="dialog" aria-labelledby="monteTarnModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="monteTarnModal" tabindex="-1" role="dialog" aria-labelledby="monteTarnModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -94,8 +69,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="parrillarModal" tabindex="-1" role="dialog" aria-labelledby="parrillarModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="parrillarModal" tabindex="-1" role="dialog" aria-labelledby="parrillarModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -111,8 +85,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="miradorZapadorModal" tabindex="-1" role="dialog"
-        aria-labelledby="miradorZapadorModalLabel" aria-hidden="true">
+    <div class="modal fade" id="miradorZapadorModal" tabindex="-1" role="dialog" aria-labelledby="miradorZapadorModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

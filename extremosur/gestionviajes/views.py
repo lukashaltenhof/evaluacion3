@@ -150,12 +150,12 @@ def paquete_delete(request, id):
 @staff_member_required
 def contacto_list(request):
     contactos = FormularioContacto.objects.all()
-    return render(request, 'gestionviajes/contacto_list.html', {'contactos': contactos})
+    return render(request, 'contacto_list.html', {'contactos': contactos})
 
 @staff_member_required
 def contacto_detail(request, id):
     contacto = get_object_or_404(FormularioContacto, id=id)
-    return render(request, 'gestionviajes/contacto_detail.html', {'contacto': contacto})
+    return render(request, 'contacto_detail.html', {'contacto': contacto})
 
 @staff_member_required
 def contacto_create(request):
@@ -166,7 +166,7 @@ def contacto_create(request):
             return redirect('contacto_list')
     else:
         form = ContactoForm()
-    return render(request, 'gestionviajes/contacto_form.html', {'form': form})
+    return render(request, 'contacto_form.html', {'form': form})
 
 @staff_member_required
 def contacto_update(request, id):
@@ -178,7 +178,7 @@ def contacto_update(request, id):
             return redirect('contacto_list')
     else:
         form = ContactoForm(instance=contacto)
-    return render(request, 'gestionviajes/contacto_form.html', {'form': form})
+    return render(request, 'contacto_form.html', {'form': form})
 
 @staff_member_required
 def contacto_delete(request, id):
@@ -186,4 +186,4 @@ def contacto_delete(request, id):
     if request.method == 'POST':
         contacto.delete()
         return redirect('contacto_list')
-    return render(request, 'gestionviajes/contacto_confirm_delete.html', {'contacto': contacto})
+    return render(request, 'contacto_confirm_delete.html', {'contacto': contacto})
