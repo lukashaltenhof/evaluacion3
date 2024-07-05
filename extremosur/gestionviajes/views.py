@@ -84,7 +84,7 @@ def login(request):
         if form.is_valid():
             user = form.get_user()
             auth_login(request, user)
-            return redirect('ver_carrito')
+            return redirect('index')
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
@@ -104,13 +104,13 @@ def nuestros_servicios(request):
 @staff_member_required
 def paquete_list(request):
     paquetes = PaqueteTuristico.objects.all()
-    return render(request, 'gestionviajes/paquete_list.html', {'paquetes': paquetes})
+    return render(request, 'paquete_list.html', {'paquetes': paquetes})
 
 # Detalle de paquete turístico
 @staff_member_required
 def paquete_detail(request, id):
     paquete = get_object_or_404(PaqueteTuristico, id=id)
-    return render(request, 'gestionviajes/paquete_detail.html', {'paquete': paquete})
+    return render(request, 'paquete_detail.html', {'paquete': paquete})
 
 # Crear paquete turístico
 @staff_member_required
@@ -122,7 +122,7 @@ def paquete_create(request):
             return redirect('paquete_list')
     else:
         form = PaqueteForm()
-    return render(request, 'gestionviajes/paquete_form.html', {'form': form})
+    return render(request, 'paquete_form.html', {'form': form})
 
 # Actualizar paquete turístico
 @staff_member_required
@@ -135,7 +135,7 @@ def paquete_update(request, id):
             return redirect('paquete_list')
     else:
         form = PaqueteForm(instance=paquete)
-    return render(request, 'gestionviajes/paquete_form.html', {'form': form})
+    return render(request, 'paquete_form.html', {'form': form})
 
 # Eliminar paquete turístico
 @staff_member_required
@@ -144,4 +144,4 @@ def paquete_delete(request, id):
     if request.method == 'POST':
         paquete.delete()
         return redirect('paquete_list')
-    return render(request, 'gestionviajes/paquete_confirm_delete.html', {'paquete': paquete})
+    return render(request, 'paquete_confirm_delete.html', {'paquete': paquete})

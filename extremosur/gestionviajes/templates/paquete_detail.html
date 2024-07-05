@@ -1,15 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Detalle del Paquete Turístico</title>
-</head>
-<body>
-    <h1>Detalle del Paquete Turístico</h1>
-    <p>Nombre Destino: {{ paquete.nombre_destino }}</p>
-    <p>Fecha de Viaje: {{ paquete.fecha_viaje }}</p>
-    <p>Valor: {{ paquete.valor }}</p>
-    <a href="{% url 'paquete_update' paquete.id %}">Editar</a>
-    <a href="{% url 'paquete_delete' paquete.id %}">Eliminar</a>
-    <a href="{% url 'paquete_list' %}">Volver a la lista</a>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Detalle del Paquete Turístico - {{ paquete.nombre_destino }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Detalle del Paquete Turístico</h1>
+        <p>Nombre Destino: {{ paquete.nombre_destino }}</p>
+        <p>Fecha de Viaje: {{ paquete.fecha_viaje }}</p>
+        <p>Valor: {{ paquete.valor }}</p>
+        <a href="{% url 'paquete_update' paquete.id %}" class="btn btn-primary">Editar</a>
+        <a href="{% url 'paquete_delete' paquete.id %}" class="btn btn-danger">Eliminar</a>
+        <a href="{% url 'paquete_list' %}" class="btn btn-secondary">Volver a la lista</a>
+    </div>
+{% endblock %}
