@@ -11,6 +11,7 @@ from .forms import RegistroUsuarioForm, RegistroClienteForm, PaqueteForm, Contac
 from .models import Carrito, PaqueteTuristico, FormularioContacto, Boleta
 from django.contrib.auth import logout as auth_logout
 from django.contrib.admin.views.decorators import staff_member_required
+from django.shortcuts import get_object_or_404
 
 def registro_cliente(request):
     if request.method == 'POST':
