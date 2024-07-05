@@ -14,4 +14,10 @@ urlpatterns = [
     path('index/', views.index, name='index'),
     path('logout/', views.logout, name='logout'),
     path('nuestros_servicios/', views.nuestros_servicios, name='nuestros_servicios'),
+    path('paquetes/', views.paquete_list, name='paquete_list'),
+    path('paquetes/<int:id>/', views.paquete_detail, name='paquete_detail'),
+    path('paquetes/create/', views.paquete_create, name='paquete_create'),
+    path('paquetes/update/<int:id>/', views.paquete_update, name='paquete_update'),
+    path('paquetes/delete/<int:id>/', views.paquete_delete, name='paquete_delete'),
+   
 ]

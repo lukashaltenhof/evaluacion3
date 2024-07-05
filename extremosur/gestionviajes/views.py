@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from .forms import RegistroUsuarioForm, RegistroClienteForm, PaqueteForm, ContactoForm
 from .models import Carrito, PaqueteTuristico, FormularioContacto, Boleta
 from django.contrib.auth import logout as auth_logout
+from django.contrib.admin.views.decorators import staff_member_required
 
 def registro_cliente(request):
     if request.method == 'POST':
@@ -97,3 +98,50 @@ def index(request):
 
 def nuestros_servicios(request):
     return render(request, 'nuestros_servicios.html')
+
+
+# Listar paquetes turísticos
+@staff_member_required
+def paquete_list(request):
+    paquetes = PaqueteTuristico.objects.all()
+    return render(request, 'gestionviajes/paquete_list.html', {'paquetes': paquetes})
+
+# Detalle de paquete turístico
+@staff_member_required
+def paquete_detail(request, id):
+    paquete = get_object_or_404(PaqueteTuristico, id=id)
+    return render(request, 'gestionviajes/paquete_detail.html', {'paquete': paquete})
+
+# Crear paquete turístico
+@staff_member_required
+def paquete_create(request):
+    if request.method == 'POST':
+        form = PaqueteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('paquete_list')
+    else:
+        form = PaqueteForm()
+    return render(request, 'gestionviajes/paquete_form.html', {'form': form})
+
+# Actualizar paquete turístico
+@staff_member_required
+def paquete_update(request, id):
+    paquete = get_object_or_404(PaqueteTuristico, id=id)
+    if request.method == 'POST':
+        form = PaqueteForm(request.POST, instance=paquete)
+        if form.is_valid():
+            form.save()
+            return redirect('paquete_list')
+    else:
+        form = PaqueteForm(instance=paquete)
+    return render(request, 'gestionviajes/paquete_form.html', {'form': form})
+
+# Eliminar paquete turístico
+@staff_member_required
+def paquete_delete(request, id):
+    paquete = get_object_or_404(PaqueteTuristico, id=id)
+    if request.method == 'POST':
+        paquete.delete()
+        return redirect('paquete_list')
+    return render(request, 'gestionviajes/paquete_confirm_delete.html', {'paquete': paquete})

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if form.instance.pk %}Editar Paquete Turístico{% else %}Crear Paquete Turístico{% endif %}</title>
+</head>
+<body>
+    <h1>{% if form.instance.pk %}Editar Paquete Turístico{% else %}Crear Paquete Turístico{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+    <a href="{% url 'paquete_list' %}">Cancelar</a>
+</body>
+</html>

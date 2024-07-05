@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Paquetes Turísticos</title>
+</head>
+<body>
+    <h1>Lista de Paquetes Turísticos</h1>
+    <a href="{% url 'paquete_create' %}">Crear Nuevo Paquete</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre Destino</th>
+                <th>Fecha de Viaje</th>
+                <th>Valor</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for paquete in paquetes %}
+            <tr>
+                <td>{{ paquete.id }}</td>
+                <td>{{ paquete.nombre_destino }}</td>
+                <td>{{ paquete.fecha_viaje }}</td>
+                <td>{{ paquete.valor }}</td>
+                <td>
+                    <a href="{% url 'paquete_detail' paquete.id %}">Ver</a>
+                    <a href="{% url 'paquete_update' paquete.id %}">Editar</a>
+                    <a href="{% url 'paquete_delete' paquete.id %}">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
