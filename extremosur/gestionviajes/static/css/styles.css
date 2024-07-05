@@ -1,32 +1,35 @@
-/* Estilos para el cuerpo de la página */
 body {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: #ccc;
     margin: 0;
     padding: 0;
-    background-image: url('img/fondo.png'); /* Ruta de la imagen de fondo */
-    background-repeat: repeat-y; /* Repetir la imagen verticalmente */
-    background-attachment: fixed; /* Hace que la imagen de fondo sea estática */
+    background-image: url('/static/css/img/fondo.png'); /* Correct path to the background image */
+    background-repeat: repeat-y;
+    background-attachment: fixed;
     background-size: cover;
 }
 
 /* Estilos para la barra de navegación */
 .navbar {
-    background-color: rgba(28, 47, 97, 0.7);; /* Cambio a fondo negro */
-    color: white; /* Letras blancas */
-    padding: 5px 0; /* Reducción del padding */
-    overflow: hidden;
+    background-color: rgba(28, 47, 97, 0.7);
+    color: white;
+    padding: 10px 0;
 }
 
 .navbar ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    text-align: center;
 }
 
 .navbar ul li {
-    float: none; /* Removido el float */
-    display: inline-block; /* Cambiado a display inline-block */
+    display: inline-block;
+    margin-right: 20px; /* Adjust as needed */
+}
+
+.navbar ul li:last-child {
+    margin-right: 0; /* Remove margin from last item */
 }
 
 .navbar ul li a {
@@ -45,6 +48,18 @@ body {
 /* Estilos para los servicios */
 .servicio {
     margin-bottom: 20px;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+.servicio h3 {
+    margin-top: 0;
+    color: #d68d2d;
+}
+
+.servicio p {
+    color: #ffffff;
 }
 
 /* Estilos para los formularios */
@@ -80,24 +95,25 @@ form button:hover {
     background-color: #45a049;
 }
 
-nav {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    text-align: center;
+/* Estilos para la sección de quienes somos */
+#quienes-somos h1 {
+    user-select: none;
 }
 
-nav a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 10px;
-    font-weight: bold;
+#quienes-somos h1:hover {
+    animation: pulse 0.5s infinite alternate;
 }
 
-nav a:hover {
-    text-decoration: underline;
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.05);
+    }
 }
 
+/* Estilos generales */
 .container {
     max-width: 800px;
     margin: 0 auto;
@@ -108,53 +124,23 @@ section {
     margin-bottom: 40px;
 }
 
-h2 {
+h2, .card-title, .card-text {
     color: #ffffff;
 }
 
-.servicio {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 20px;
+.card {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 10px;
 }
 
-.servicio h3 {
-    margin-top: 0;
-    color: #d68d2d;
-}
-
-.servicio p {
-    color: #ffffff;
-}
-
-iframe {
-    border: 0;
-    width: 100%;
-    height: 400px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.modal-dialog {
-    max-width: 600px;
-}
-
-/* Ajusta el tamaño de la imagen dentro del modal */
-.modal-content img {
-    width: 100%;
-    height: auto;
-}
-
-.navbar-brand img {
-    width: 150px; /* Ajusta este valor según sea necesario */
-    height: auto;
-    margin-left: 20px;
-    padding-left: 20px;
+.card-title,
+.card-text {
+    color: #fff;
 }
 
 .card-img-top {
-    border-radius: 10px; /* Agrega bordes redondeados */
+    border-radius: 10px;
 }
 
 .card:hover .card-img-top {
@@ -162,33 +148,31 @@ iframe {
     transition: transform 0.3s ease;
 }
 
+.modal-dialog {
+    max-width: 600px;
+}
+
+.modal-content img {
+    width: 100%;
+    height: auto;
+}
+
+.navbar-brand img {
+    width: 150px;
+    height: auto;
+    margin-left: 20px;
+    padding-left: 20px;
+}
+
 .carousel-item img {
     max-width: 1000px;
     height: auto;
-    margin: auto; /* Centra horizontalmente */
+    margin: auto;
 }
 
 .carousel {
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3); /* Ajusta los valores según sea necesario */
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo negro con opacidad del 50% */
-}
-
-/* Estilos para las cards */
-.card {
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo negro con opacidad del 50% */
-
-    color: #fff; /* Letras blancas */
-    border-radius: 10px; /* Bordes redondeados */
-}
-
-/* Estilos para los títulos de las cards */
-.card-title {
-    color: #fff; /* Letras blancas */
-}
-
-/* Estilos para los textos dentro de las cards */
-.card-text {
-    color: #fff; /* Letras blancas */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Estilos para la sección de pronóstico */
@@ -196,7 +180,7 @@ iframe {
     margin: 5%;
     padding: 20px;
     max-width: auto;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo negro con opacidad del 50% */
+    background-color: rgba(0, 0, 0, 0.5);
     border: 1px solid #dee2e6;
     border-radius: 5px;
 }
@@ -212,9 +196,9 @@ iframe {
 }
 
 .weather-forecast {
-    display: flex; /* Utilizar flexbox */
-    flex-wrap: wrap; /* Permitir que los elementos se envuelvan si no caben en una sola línea */
-    justify-content: space-around; /* Distribuir los elementos de manera uniforme a lo largo de la línea */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .weather-forecast h2 {
@@ -236,37 +220,10 @@ iframe {
     padding-bottom: 10px;
 }
 
-
-#quienes-somos h1:hover {
-    animation: pulse 0.5s infinite alternate;
-}
-
-@keyframes pulse {
-    from {
-        transform: scale(1);
-    }
-    to {
-        transform: scale(1.05);
-    }
-}
-
-#quienes-somos h1 {
-    user-select: none;
-}
-
-#quienes-somos h1:hover {
-    animation: pulse 0.5s infinite alternate;
-}
-
-@keyframes pulse {
-    from {
-        transform: scale(1);
-    }
-    to {
-        transform: scale(1.05);
-    }
-}
-
-#quienes-somos h1 {
-    user-select: none;
+iframe {
+    border: 0;
+    width: 100%;
+    height: 400px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
