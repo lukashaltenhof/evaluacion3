@@ -1,39 +1,37 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}
-    Lista de Paquetes Turísticos - Turismo ExtremoSur
-{% endblock %}
-
 {% block content %}
-    <div class="container">
-        <h1>Lista de Paquetes Turísticos</h1>
-        <a href="{% url 'paquete_create' %}" class="btn btn-primary mb-3">Crear Nuevo Paquete</a>
-        <table class="table table-striped">
-            <thead class="thead-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre Destino</th>
-                    <th>Fecha de Viaje</th>
-                    <th>Valor</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for paquete in paquetes %}
-                <tr>
-                    <td>{{ paquete.id }}</td>
-                    <td>{{ paquete.nombre_destino }}</td>
-                    <td>{{ paquete.fecha_viaje }}</td>
-                    <td>{{ paquete.valor }}</td>
-                    <td>
-                        <a href="{% url 'paquete_detail' paquete.id %}" class="btn btn-info btn-sm">Ver</a>
-                        <a href="{% url 'paquete_update' paquete.id %}" class="btn btn-warning btn-sm">Editar</a>
-                        <a href="{% url 'paquete_delete' paquete.id %}" class="btn btn-danger btn-sm">Eliminar</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <h1>Lista de Contactos</h1>
+    <a href="{% url 'contacto_create' %}">Crear Nuevo Contacto</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>RUT</th>
+                <th>Ciudad</th>
+                <th>Correo Electrónico</th>
+                <th>Consulta</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contacto in contactos %}
+            <tr>
+                <td>{{ contacto.id }}</td>
+                <td>{{ contacto.nombre }}</td>
+                <td>{{ contacto.rut }}</td>
+                <td>{{ contacto.ciudad }}</td>
+                <td>{{ contacto.correo_electronico }}</td>
+                <td>{{ contacto.consulta }}</td>
+                <td>
+                    <a href="{% url 'contacto_detail' contacto.id %}">Ver</a>
+                    <a href="{% url 'contacto_update' contacto.id %}">Editar</a>
+                    <a href="{% url 'contacto_delete' contacto.id %}">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
