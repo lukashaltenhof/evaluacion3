@@ -67,7 +67,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
-                'tu_aplicacion.context_processors.search_form',
+                'gestionviajes.context_processors.search_form',
             ],
         },
     },

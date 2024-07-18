@@ -1,5 +1,3 @@
-# gestionviajes/models.py
-
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -14,11 +12,11 @@ class Cliente(models.Model):
 class PaqueteTuristico(models.Model):
     nombre_destino = models.CharField(max_length=100)
     fecha_viaje = models.DateField()
-    valor = models.DecimalField(max_digits=10, decimal_places=2)
+    valor = models.IntegerField()  # Cambiado a IntegerField para no tener decimales
     imagen = models.ImageField(upload_to='imagenes_paquetes/', null=True, blank=True)
 
     def __str__(self):
-        return self.nombre_destino
+        return f"{self.nombre_destino} - ${self.valor}"
 
 class Carrito(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)

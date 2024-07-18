@@ -17,19 +17,17 @@
                             <h5 class="card-title">{{ paquete.nombre_destino }}</h5>
                             <p class="card-text">Fecha de Viaje: {{ paquete.fecha_viaje }}</p>
                             <p class="card-text">Valor: {{ paquete.valor }}</p>
-                            # AGREGAR CARRITO ACAAAAAA
-
-
+                            <a href="#" class="btn btn-primary">Agregar al Carrito</a>
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
-        <div class="pagination">
+        <div class="pagination mt-4">
             <span class="step-links">
                 {% if page_obj.has_previous %}
-                    <a href="?page=1">&laquo; primero</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">anterior</a>
+                    <a href="?page=1" class="btn btn-outline-primary">&laquo; primero</a>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary">anterior</a>
                 {% endif %}
 
                 <span class="current">
@@ -37,8 +35,8 @@
                 </span>
 
                 {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">siguiente</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">último &raquo;</a>
+                    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary">Siguiente</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary">Último &raquo;</a>
                 {% endif %}
             </span>
         </div>
