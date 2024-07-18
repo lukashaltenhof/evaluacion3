@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h1>Nuestros Paquetes</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre Destino</th>
+                    <th>Fecha de Viaje</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for paquete in page_obj %}
+                <tr>
+                    <td>{{ paquete.nombre_destino }}</td>
+                    <td>{{ paquete.fecha_viaje }}</td>
+                    <td>{{ paquete.valor }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; primero</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">anterior</a>
+                {% endif %}
+
+                <span class="current">
+                    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">siguiente</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">último &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+{% endblock %}

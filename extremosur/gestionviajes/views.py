@@ -12,6 +12,8 @@ from .models import Carrito, PaqueteTuristico, FormularioContacto, Boleta
 from django.contrib.auth import logout as auth_logout
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import get_object_or_404
+from django.core.paginator import Paginator
+from django.shortcuts import render
 
 def registro_cliente(request):
     if request.method == 'POST':
@@ -101,11 +103,12 @@ def nuestros_servicios(request):
     return render(request, 'nuestros_servicios.html')
 
 
-# Listar paquetes turísticos
-@staff_member_required
 def paquete_list(request):
     paquetes = PaqueteTuristico.objects.all()
-    return render(request, 'paquete_list.html', {'paquetes': paquetes})
+    paginator = Paginator(paquetes, 10)  
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'paquete_list.html', {'page_obj': page_obj})
 
 # Detalle de paquete turístico
 @staff_member_required
@@ -187,3 +190,12 @@ def contacto_delete(request, id):
         contacto.delete()
         return redirect('contacto_list')
     return render(request, 'contacto_confirm_delete.html', {'contacto': contacto})
+
+
+def vista_paquetes_cliente(request):
+    paquetes = PaqueteTuristico.objects.all()
+    paginator = Paginator(paquetes, 1)  # Mostrar 10 paquetes por página
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'vista_paquetes_cliente.html', {'page_obj': page_obj})

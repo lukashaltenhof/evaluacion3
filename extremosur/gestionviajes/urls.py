@@ -1,5 +1,3 @@
-
-
 from django.urls import path
 from . import views
 
@@ -24,4 +22,5 @@ urlpatterns = [
     path('contactos/create/', views.contacto_create, name='contacto_create'),
     path('contactos/update/<int:id>/', views.contacto_update, name='contacto_update'),
     path('contactos/delete/<int:id>/', views.contacto_delete, name='contacto_delete'),
+    path('vista_paquetes_cliente/', views.vista_paquetes_cliente, name='vista_paquetes_cliente'),
 ]
