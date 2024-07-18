@@ -8,10 +8,15 @@
 {% block content %}
     <div class="container">
         <h1 class="my-4">Nuestros Paquetes</h1>
-        <div class="row">
+
+        <!-- Barra de búsqueda -->
+
+
+        <div id="paquetes-list" class="row">
+            <!-- Aquí se renderizarán los resultados -->
             {% for paquete in page_obj %}
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
                         {% if paquete.imagen %}
                             <img src="{{ paquete.imagen.url }}" class="card-img-top" alt="{{ paquete.nombre_destino }}">
                         {% else %}
@@ -25,13 +30,18 @@
                         </div>
                     </div>
                 </div>
+            {% empty %}
+                <div class="col-md-12">
+                    <p>No se encontraron paquetes.</p>
+                </div>
             {% endfor %}
         </div>
+
         <div class="pagination mt-4">
             <span class="step-links">
                 {% if page_obj.has_previous %}
-                    <a href="?page=1" class="btn btn-outline-primary">&laquo; primero</a>
-                    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary">anterior</a>
+                    <a href="?page=1{% if query %}&query={{ query }}{% endif %}" class="btn btn-outline-primary">&laquo; primero</a>
+                    <a href="?page={{ page_obj.previous_page_number }}{% if query %}&query={{ query }}{% endif %}" class="btn btn-outline-primary">anterior</a>
                 {% endif %}
 
                 <span class="current">
@@ -39,10 +49,44 @@
                 </span>
 
                 {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary">Siguiente</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary">Último &raquo;</a>
+                    <a href="?page={{ page_obj.next_page_number }}{% if query %}&query={{ query }}{% endif %}" class="btn btn-outline-primary">Siguiente</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}{% if query %}&query={{ query }}{% endif %}" class="btn btn-outline-primary">Último &raquo;</a>
                 {% endif %}
             </span>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            // Función para actualizar los resultados de búsqueda
+            function updateSearchResults(query) {
+                $.ajax({
+                    url: '{% url "vista_paquetes_cliente" %}',
+                    type: 'GET',
+                    data: {
+                        'query': query,
+                    },
+                    success: function(response) {
+                        $('#paquetes-list').html(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error en la solicitud AJAX:', error);
+                    }
+                });
+            }
+
+            // Manejar eventos de entrada en el campo de búsqueda
+            $('#search-input').on('input', function() {
+                var query = $(this).val().trim();
+                updateSearchResults(query);
+            });
+
+            // Manejar el envío del formulario de búsqueda
+            $('#search-form').submit(function(event) {
+                event.preventDefault(); // Evitar el envío estándar del formulario
+                var query = $('#search-input').val().trim();
+                updateSearchResults(query);
+            });
+        });
+    </script>
 {% endblock %}

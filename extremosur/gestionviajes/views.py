@@ -1,5 +1,4 @@
 # gestionviajes/views.py
-
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -14,6 +13,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from django.shortcuts import render
+from django.db.models import Q
+from django.http import JsonResponse
 
 def registro_cliente(request):
     if request.method == 'POST':
@@ -193,9 +194,30 @@ def contacto_delete(request, id):
 
 
 def vista_paquetes_cliente(request):
+    query = request.GET.get('query')
     paquetes = PaqueteTuristico.objects.all()
-    paginator = Paginator(paquetes, 6)  # Mostrar 10 paquetes por página
 
+    if query:
+        paquetes = paquetes.filter(
+            Q(nombre_destino__icontains=query)
+        )
+
+    paginator = Paginator(paquetes, 6)  # Mostrar 6 paquetes por página
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'vista_paquetes_cliente.html', {'page_obj': page_obj})
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        # Si es una solicitud AJAX, devolvemos solo el contenido de los paquetes
+        context = {
+            'page_obj': page_obj,
+            'query': query,
+        }
+        html_response = render(request, 'paquetes_partial.html', context).content.decode('utf-8')
+        return JsonResponse(html_response, safe=False)
+
+    # Si no es AJAX, renderizamos la página completa
+    context = {
+        'page_obj': page_obj,
+        'query': query,
+    }
+    return render(request, 'vista_paquetes_cliente.html', context)
