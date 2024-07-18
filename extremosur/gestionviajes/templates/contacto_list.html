@@ -7,10 +7,72 @@
 <head>
     <title>Lista de Contactos</title>
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <style>
+        /* Estilos adicionales para la tabla y los botones */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #ffffff; /* Color de texto blanco */
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+            color: #ffffff; /* Color de texto blanco */
+        }
+
+        th {
+            background-color: #333; /* Color de fondo para encabezados */
+        }
+
+        tr:nth-child(even) {
+            background-color: #555; /* Color de fondo para filas pares */
+        }
+
+        tr:hover {
+            background-color: #777; /* Color de fondo al pasar el mouse */
+        }
+
+        .btn {
+            background-color: #4CAF50; /* Color de fondo verde */
+            color: white; /* Texto blanco */
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease; /* Transición suave */
+        }
+
+        .btn:hover {
+            background-color: #45a049; /* Color de fondo más oscuro al pasar el mouse */
+        }
+
+        .btn-danger {
+            background-color: #f44336; /* Color de fondo rojo */
+        }
+
+        .btn-danger:hover {
+            background-color: #da190b; /* Color de fondo más oscuro al pasar el mouse */
+        }
+    </style>
 </head>
 <body>
     <h1>Lista de Solicitud de Contacto</h1>
-    <a href="{% url 'contacto_create' %}">Crear Nuevo Contacto</a>
+    <a href="{% url 'contacto_create' %}" class="btn btn-success">Crear Nuevo Contacto</a>
     <table>
         <thead>
             <tr>
@@ -33,9 +95,9 @@
                 <td>{{ contacto.correo_electronico }}</td>
                 <td>{{ contacto.consulta }}</td>
                 <td>
-                    <a href="{% url 'contacto_detail' contacto.id %}">Ver</a>
-                    <a href="{% url 'contacto_update' contacto.id %}">Editar</a>
-                    <a href="{% url 'contacto_delete' contacto.id %}">Eliminar</a>
+                    <a href="{% url 'contacto_detail' contacto.id %}" class="btn btn-primary">Ver</a>
+                    <a href="{% url 'contacto_update' contacto.id %}" class="btn btn-warning">Editar</a>
+                    <a href="{% url 'contacto_delete' contacto.id %}" class="btn btn-danger">Eliminar</a>
                 </td>
             </tr>
             {% endfor %}

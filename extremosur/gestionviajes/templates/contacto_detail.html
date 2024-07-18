@@ -6,17 +6,65 @@
 <html>
 <head>
     <title>Detalle del Contacto</title>
+    <style>
+        /* Estilos adicionales para la página de detalle del contacto */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #ffffff; /* Color de texto blanco */
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            background-color: #4CAF50; /* Color de fondo verde */
+            color: white; /* Texto blanco */
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease; /* Transición suave */
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #45a049; /* Color de fondo más oscuro al pasar el mouse */
+        }
+
+        .btn-danger {
+            background-color: #f44336; /* Color de fondo rojo */
+        }
+
+        .btn-danger:hover {
+            background-color: #da190b; /* Color de fondo más oscuro al pasar el mouse */
+        }
+    </style>
 </head>
 <body>
     <h1>Detalle del Contacto</h1>
-    <p>Nombre: {{ contacto.nombre }}</p>
-    <p>RUT: {{ contacto.rut }}</p>
-    <p>Ciudad: {{ contacto.ciudad }}</p>
-    <p>Correo Electrónico: {{ contacto.correo_electronico }}</p>
-    <p>Consulta: {{ contacto.consulta }}</p>
-    <a href="{% url 'contacto_update' contacto.id %}">Editar</a>
-    <a href="{% url 'contacto_delete' contacto.id %}">Eliminar</a>
-    <a href="{% url 'contacto_list' %}">Volver a la lista</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <p><strong>Nombre:</strong> {{ contacto.nombre }}</p>
+                <p><strong>RUT:</strong> {{ contacto.rut }}</p>
+                <p><strong>Ciudad:</strong> {{ contacto.ciudad }}</p>
+                <p><strong>Correo Electrónico:</strong> {{ contacto.correo_electronico }}</p>
+                <p><strong>Consulta:</strong> {{ contacto.consulta }}</p>
+                <a href="{% url 'contacto_update' contacto.id %}" class="btn btn-warning">Editar</a>
+                <a href="{% url 'contacto_delete' contacto.id %}" class="btn btn-danger">Eliminar</a>
+                <a href="{% url 'contacto_list' %}" class="btn btn-primary">Volver a la lista</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 
