@@ -140,15 +140,31 @@ h2, .card-title, .card-text {
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     border-radius: 10px;
+    height: 100%;
+    border: none; /* Eliminar el borde para que todas las cards tengan el mismo aspecto */
 }
 
-.card-title,
+.card-body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-title {
+    font-size: 1.25rem; /* Tamaño del título */
+    margin-bottom: 0.75rem; /* Espacio inferior */
+    color: #fff; /* Color de texto blanco */
+}
+
 .card-text {
-    color: #fff;
+    color: #fff; /* Color de texto blanco */
 }
 
 .card-img-top {
-    border-radius: 10px;
+    height: 200px; /* Altura deseada para la imagen */
+    object-fit: cover; /* Ajustar la imagen para cubrir el área asignada */
+    border-radius: 10px; /* Borde redondeado para las imágenes */
 }
 
 .card:hover .card-img-top {
@@ -281,4 +297,42 @@ table a:hover {
 
 .add-btn:hover {
     background-color: #218838; /* Color de fondo más oscuro al pasar el mouse */
+}
+/* Estilos para las cards */
+.card {
+    background-color: rgba(237, 13, 13, 0.5);
+    color: #fff;
+    border-radius: 10px;
+    border: none; /* Eliminar el borde para que todas las cards tengan el mismo aspecto */
+    height: 400px; /* Ajustar altura al 100% */
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body {
+    flex: 1; /* Hacer que el cuerpo de la card ocupe el espacio disponible */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-title {
+    font-size: 1.25rem; /* Tamaño del título */
+    margin-bottom: 0.75rem; /* Espacio inferior */
+    color: #fff; /* Color de texto blanco */
+}
+
+.card-text {
+    color: #fff; /* Color de texto blanco */
+}
+
+.card-img-top {
+    height: 200px; /* Altura deseada para la imagen */
+    object-fit: cover; /* Ajustar la imagen para cubrir el área asignada */
+    border-radius: 10px; /* Borde redondeado para las imágenes */
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
 }
