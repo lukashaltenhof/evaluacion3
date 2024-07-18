@@ -7,37 +7,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Listado de Paquetes Turísticos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
 <body>
-    <h1>Listado de Paquetes Turísticos</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre Destino</th>
-                <th>Fecha de Viaje</th>
-                <th>Valor</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="container">
+        <h1>Listado de Paquetes Turísticos</h1>
+        <div class="row">
             {% for paquete in paquetes %}
-            <tr>
-                <td>{{ paquete.nombre_destino }}</td>
-                <td>{{ paquete.fecha_viaje }}</td>
-                <td>{{ paquete.valor }}</td>
-                <td>
-                    <a href="{% url 'paquete_detail' paquete.id %}">Ver</a>
-                    <a href="{% url 'paquete_update' paquete.id %}">Editar</a>
-                    <a href="{% url 'paquete_delete' paquete.id %}">Eliminar</a>
-                </td>
-            </tr>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        {% if paquete.imagen %}
+                            <img src="{{ paquete.imagen.url }}" class="card-img-top" alt="{{ paquete.nombre_destino }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ paquete.nombre_destino }}</h5>
+                            <p class="card-text">Fecha de Viaje: {{ paquete.fecha_viaje }}</p>
+                            <p class="card-text">Valor: {{ paquete.valor }}</p>
+                            <a href="{% url 'paquete_detail' paquete.id %}" class="btn btn-primary">Ver</a>
+                            <a href="{% url 'paquete_update' paquete.id %}" class="btn btn-secondary">Editar</a>
+                            <a href="{% url 'paquete_delete' paquete.id %}" class="btn btn-danger">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
             {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{% url 'paquete_create' %}">Agregar Nuevo Paquete</a>
+        </div>
+        <a href="{% url 'paquete_create' %}" class="btn btn-success">Agregar Nuevo Paquete</a>
+    </div>
 </body>
 </html>
 {% endblock %}

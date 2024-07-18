@@ -194,7 +194,7 @@ def contacto_delete(request, id):
 
 def vista_paquetes_cliente(request):
     paquetes = PaqueteTuristico.objects.all()
-    paginator = Paginator(paquetes, 1)  # Mostrar 10 paquetes por página
+    paginator = Paginator(paquetes, 10)  # Mostrar 10 paquetes por página
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

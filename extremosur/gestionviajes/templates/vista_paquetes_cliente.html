@@ -3,25 +3,28 @@
 
 {% block content %}
     <div class="container">
-        <h1>Nuestros Paquetes</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nombre Destino</th>
-                    <th>Fecha de Viaje</th>
-                    <th>Valor</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for paquete in page_obj %}
-                <tr>
-                    <td>{{ paquete.nombre_destino }}</td>
-                    <td>{{ paquete.fecha_viaje }}</td>
-                    <td>{{ paquete.valor }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <h1 class="my-4">Nuestros Paquetes</h1>
+        <div class="row">
+            {% for paquete in page_obj %}
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        {% if paquete.imagen %}
+                            <img src="{{ paquete.imagen.url }}" class="card-img-top" alt="{{ paquete.nombre_destino }}">
+                        {% else %}
+                            <img src="{% static 'img/default.png' %}" class="card-img-top" alt="No Image">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ paquete.nombre_destino }}</h5>
+                            <p class="card-text">Fecha de Viaje: {{ paquete.fecha_viaje }}</p>
+                            <p class="card-text">Valor: {{ paquete.valor }}</p>
+                            # AGREGAR CARRITO ACAAAAAA
+
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
         <div class="pagination">
             <span class="step-links">
                 {% if page_obj.has_previous %}
