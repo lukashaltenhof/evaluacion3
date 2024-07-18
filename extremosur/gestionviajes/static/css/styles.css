@@ -10,7 +10,7 @@ body {
 }
 
 .navbar {
-    background-color: #f8f9fa; /* Fondo claro */
+    background-color: #000000; 
 }
 
 .navbar-nav .nav-item {
@@ -18,7 +18,7 @@ body {
 }
 
 .navbar-nav .nav-link {
-    color: #333; /* Color de texto */
+    color: #858585; /* Color de texto */
     padding: 10px 15px; /* Espaciado interior */
     transition: color 0.3s ease, background-color 0.3s ease; /* Transición suave */
 }
@@ -37,11 +37,11 @@ body {
 }
 
 .navbar-brand img {
-    width: 150px;
-    height: auto;
+    max-height: 30px; /* Tamaño máximo del logo */
     margin-left: 20px;
     padding-left: 20px;
 }
+
 
 /* Estilos para los servicios */
 .servicio {
@@ -60,7 +60,7 @@ body {
     color: #ffffff;
 }
 
-/* Estilos para los formularios */
+
 form {
     margin-top: 20px;
 }
@@ -284,7 +284,7 @@ table a:hover {
 
 /* Estilos para las cards */
 .card {
-    background-color: rgba(68, 172, 190, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     border-radius: 10px;
     border: none; /* Eliminar el borde para que todas las cards tengan el mismo aspecto */
