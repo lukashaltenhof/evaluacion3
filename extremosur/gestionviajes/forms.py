@@ -24,3 +24,5 @@ class ContactoForm(forms.ModelForm):
         model = FormularioContacto
         fields = ['nombre', 'rut', 'ciudad', 'correo_electronico', 'consulta']
 
+class BuscarPaqueteForm(forms.Form):
+    query = forms.CharField(label='Buscar paquete', max_length=100)
