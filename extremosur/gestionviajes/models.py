@@ -20,8 +20,18 @@ class PaqueteTuristico(models.Model):
 
 class Carrito(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    paquetes = models.ManyToManyField(PaqueteTuristico)
+    paquetes = models.ManyToManyField(PaqueteTuristico, through='CarritoPaquete')
     total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    def total_price(self):
+        return sum(item.subtotal() for item in self.carritopaquete_set.all())
+
+class CarritoPaquete(models.Model):
+    carrito = models.ForeignKey('Carrito', on_delete=models.CASCADE)
+    paquete = models.ForeignKey('PaqueteTuristico', on_delete=models.CASCADE)
+    cantidad = models.IntegerField(default=1)
+
+    def subtotal(self):
+        return self.paquete.valor * self.cantidad
 
 class Boleta(models.Model):
     carrito = models.OneToOneField(Carrito, on_delete=models.CASCADE)

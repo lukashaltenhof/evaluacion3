@@ -1,50 +1,29 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static my_filters%}
 
 {% block content %}
     <div class="container">
         <h2>Carrito de Compras</h2>
+        
+        {% if carrito_items %}
+            <ul class="list-group mb-4">
+                {% for item, cantidad in carrito_items %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ item.nombre_destino }} - {{ cantidad }} x ${{ item.valor }}
+                    <span>Total: ${{ item.valor|multiply:cantidad }}</span>
+                    <div>
+                        <button onclick="changeQuantity('decrease', {{ item.id }})">-</button>
+                        <span>{{ cantidad }}</span>
+                        <button onclick="changeQuantity('increase', {{ item.id }})">+</button>
+                    </div>
+                </li>
+                {% endfor %}
 
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Paquete de Viaje A</h5>
-                <p class="card-text">Descripción del paquete A.</p>
-                <p class="card-text">Precio: $1000</p>
-                <form method="post">
-                    {% csrf_token %}
-                    <label for="fecha_salida_a">Fecha de Salida:</label>
-                    <input type="date" id="fecha_salida_a" name="fecha_salida_a" required>
-                    <button type="submit" class="btn btn-primary mt-2">Agregar al Carrito</button>
-                </form>
-            </div>
-        </div>
-
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Paquete de Viaje B</h5>
-                <p class="card-text">Descripción del paquete B.</p>
-                <p class="card-text">Precio: $1500</p>
-                <form method="post">
-                    {% csrf_token %}
-                    <label for="fecha_salida_b">Fecha de Salida:</label>
-                    <input type="date" id="fecha_salida_b" name="fecha_salida_b" required>
-                    <button type="submit" class="btn btn-primary mt-2">Agregar al Carrito</button>
-                </form>
-            </div>
-        </div>
-
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Paquete de Viaje C</h5>
-                <p class="card-text">Descripción del paquete C.</p>
-                <p class="card-text">Precio: $1200</p>
-                <form method="post">
-                    {% csrf_token %}
-                    <label for="fecha_salida_c">Fecha de Salida:</label>
-                    <input type="date" id="fecha_salida_c" name="fecha_salida_c" required>
-                    <button type="submit" class="btn btn-primary mt-2">Agregar al Carrito</button>
-                </form>
-            </div>
-        </div>
+            </ul>
+            <h4>Total: ${{ total }}</h4>
+            <button onclick="clearCartAndNotify()">Proceder a pagar</button>
+        {% else %}
+            <p>Tu carrito está vacío.</p>
+        {% endif %}
     </div>
 {% endblock %}

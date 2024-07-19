@@ -26,7 +26,7 @@
                             <h5 class="card-title">{{ paquete.nombre_destino }}</h5>
                             <p class="card-text">Fecha de Viaje: {{ paquete.fecha_viaje }}</p>
                             <p class="card-text">Valor: {{ paquete.valor }}</p>
-                            <a href="#" class="btn btn-primary">Agregar al Carrito</a>
+                            <a href="{% url 'agregar_al_carrito' paquete.id %}" class="btn btn-primary">Agregar al Carrito</a>
                         </div>
                     </div>
                 </div>

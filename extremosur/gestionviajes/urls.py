@@ -23,4 +23,7 @@ urlpatterns = [
     path('contactos/update/<int:id>/', views.contacto_update, name='contacto_update'),
     path('contactos/delete/<int:id>/', views.contacto_delete, name='contacto_delete'),
     path('vista_paquetes_cliente/', views.vista_paquetes_cliente, name='vista_paquetes_cliente'),
+    path('carrito/', views.ver_carrito, name='ver_carrito'),
+    path('agregar_al_carrito/<int:item_id>/', views.agregar_al_carrito, name='agregar_al_carrito'),
+    path('path/to/clear_cart/', views.clear_cart, name='clear_cart'),
 ]

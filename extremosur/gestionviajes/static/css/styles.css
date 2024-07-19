@@ -320,3 +320,14 @@ table a:hover {
     transform: scale(1.1);
     transition: transform 0.3s ease;
 }
+
+.no-hover .nav-link {
+    pointer-events: none;
+    cursor: default;
+    
+}
+
+.no-hover .nav-link:hover {
+    background-color: transparent;
+    
+}

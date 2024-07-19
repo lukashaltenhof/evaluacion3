@@ -15,6 +15,10 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.db.models import Q
 from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
+import json
+
 
 def registro_cliente(request):
     if request.method == 'POST':
@@ -43,13 +47,26 @@ def agregar_paquete(request):
     return render(request, 'agregar_paquete.html', {'form': form})
 
 
+@login_required
 def agregar_al_carrito(request, paquete_id):
-    cliente = request.user.cliente
-    paquete = PaqueteTuristico.objects.get(id=paquete_id)
-    carrito, created = Carrito.objects.get_or_create(cliente=cliente)
-    carrito.paquetes.add(paquete)
-    carrito.total += paquete.valor
-    carrito.save()
+    print("Before adding, cart:", request.session.get('carrito', 'Cart is empty'))
+
+    if not str(paquete_id).isdigit():
+        return HttpResponseBadRequest("Invalid item ID")
+
+    paquete_id = int(paquete_id)
+    carrito = request.session.get('carrito', {})
+
+    if paquete_id in carrito:
+        carrito[paquete_id] += 1
+    else:
+        carrito[paquete_id] = 1
+
+    request.session['carrito'] = carrito
+    request.session.modified = True
+
+    print("After adding, cart:", request.session['carrito'])
+
     return redirect('ver_carrito')
 
 def pago(request):
@@ -71,14 +88,22 @@ def contacto(request):
 
 @login_required
 def ver_carrito(request):
-    try:
-        cliente = request.user.cliente
-        carrito, created = Carrito.objects.get_or_create(cliente=cliente)
-    except Carrito.DoesNotExist:
-        return redirect('index')  # Redirige al index si no existe carrito para este usuario
+    carrito_session = request.session.get('carrito', {})
+    carrito_items = []
+    total = 0
 
-    return render(request, 'carrito.html', {'carrito': carrito})
+    for item_id, cantidad in carrito_session.items():
+        if not str(item_id).isdigit():
+            # Handle invalid item_id (e.g., log, skip, etc.)
+            continue  # Skip this iteration if item_id is not a valid digit
 
+        item_id = int(item_id)  # Convert item_id to integer
+        item = get_object_or_404(PaqueteTuristico, id=item_id)
+        total_item = item.valor * cantidad
+        total += total_item
+        carrito_items.append((item, cantidad))
+
+    return render(request, 'carrito.html', {'carrito_items': carrito_items, 'total': total})
 
 
 @csrf_protect
@@ -221,3 +246,40 @@ def vista_paquetes_cliente(request):
         'query': query,
     }
     return render(request, 'vista_paquetes_cliente.html', context)
+
+@login_required
+def add_to_cart_view(request, item_id):
+    paquete = get_object_or_404(Paquete, id=item_id)
+    # Assuming you have a Cart model or a session-based cart
+    # This is a placeholder for the logic to add the item to the cart
+    cart = request.session.get('cart', {})
+    cart[item_id] = cart.get(item_id, 0) + 1
+    request.session['cart'] = cart
+    return redirect('cart_view_url_name')
+
+
+@require_POST
+def modify_quantity(request):
+    # Assuming the cart is stored in the session
+    data = json.loads(request.body)
+    action = data['action']
+    item_id = data['itemId']
+    
+    # Modify the quantity in the session
+    carrito = request.session.get('carrito', {})
+    if item_id in carrito:
+        if action == 'increase':
+            carrito[item_id]['cantidad'] += 1
+        elif action == 'decrease' and carrito[item_id]['cantidad'] > 1:
+            carrito[item_id]['cantidad'] -= 1
+    
+    request.session['carrito'] = carrito
+    
+    # Return a response
+    return JsonResponse({'success': True, 'newQuantity': carrito[item_id]['cantidad']})
+
+@require_POST
+def clear_cart(request):
+    if 'carrito' in request.session:
+        del request.session['carrito']
+    return JsonResponse({'success': True})
